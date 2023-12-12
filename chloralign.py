@@ -4,6 +4,7 @@ import time
 import json
 import csv
 import time
+import sys
 import multiprocessing
 from multiprocessing import Pool
 from os import path
@@ -18,12 +19,31 @@ OUT = DIR + 'output/'
 ERR = 'errorReport.txt'
 numProcessors = 50
 maxTasksPerChild = 1
+argList = []
 
 def command(cmd: str):
  subprocess.run([cmd], shell = True)
 
 def timestamp():
  return str('[' + time.ctime() + ']: ')
+
+def argumentCheck(argList):
+ for arg in argList:
+  if argList[0] == '-dir' or argList[0] == '-d':
+   DIR = argList[1]
+   SRC = DIR + 'source/'
+   OUT = DIR + 'output/'
+   TMP = DIR + 'temp/'
+   CSV = SRC + 'AccessionList2.txt'
+   FASTP = SRC + 'fastp'
+  elif argList[0] == '-referencegenome' or argList[0] == '-r':
+   REFGENOME = argList[1]
+  elif argList[0] == '-input' or argList[0] == '-i':
+   CSV = SRC + argList[1]
+  elif argList[0] == '-numprocessors' or argList[0] == '-np':
+   numProcessors = int(argList[1])
+  del argList[0]
+  del argList[0]
 
 def processRun(run):
  try:
@@ -93,6 +113,10 @@ def check_SRAToolkit():
 def main():
  print('\n=====\nWelcome to Chloralign v2.0\n=====\n')
  time_start = time.time()
+ for arg in sys.argv:
+  argList.append(arg)
+ del argList[0]
+ argumentCheck(argList)
  print(timestamp() + 'Checking for mandatory modules...')
  check_AccessionList()
  check_Fastp()
