@@ -9,10 +9,10 @@ import multiprocessing
 from multiprocessing import Pool
 from os import path
 
-DIR = '/mnt/scratch/camrynbass/chloralign/'
+DIR = os.getcwd() + '/Desktop/chloralign/'
 SRC = DIR + 'source/'
 TMP = DIR + 'temp/'
-CSV = SRC + 'AccessionList2.txt'
+CSV = DIR + 'AccessionList2.txt'
 FASTP = SRC + 'fastp'
 REFGENOME = 'HA89_cytoplasm.fasta'
 OUT = DIR + 'output/'
@@ -87,6 +87,8 @@ def check_AccessionList():
    print(timestamp() + CSV + ' located.')
  except IOError:
   print(timestamp() + 'ERROR: Input file not detected. Check source directory.')
+  command('ls')
+  print('couldnt find ' + CSV)
   quit()
 
 def check_Fastp():
