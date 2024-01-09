@@ -7,7 +7,7 @@ import sys
 import multiprocessing
 from multiprocessing import Pool
 
-DIR = os.getcwd()
+DIR = os.getcwd() + '/'
 SRC = DIR + 'source/'
 TMP = DIR + 'temp/'
 CSV = DIR + 'AccessionList2.txt'
