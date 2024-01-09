@@ -1,16 +1,13 @@
 import os
 import subprocess
 import time
-import json
 import csv
 import time
 import sys
 import multiprocessing
 from multiprocessing import Pool
-from os import path
 
-
-DIR = os.getcwd() + '/chloralign/'
+DIR = os.getcwd()
 SRC = DIR + 'source/'
 TMP = DIR + 'temp/'
 CSV = DIR + 'AccessionList2.txt'
@@ -158,8 +155,8 @@ def main():
   homologous_run_list = biosample_dict[biosample]
   if len(homologous_run_list) > 1:
    for homo_run in homologous_run_list:
-    command('samtools view -b -F 1 ' + OUT + run + '.lite.sam -o ' + TMP + run + '.bam')
-   command('samtools merge ' + biosample_bam + (' ' + TMP).join(homologous_run_list) + ' -f')
+    command('samtools view -b -F 1 ' + OUT + homo_run + '.lite.sam -o ' + TMP + run + '.bam')
+   command('samtools merge ' + TMP + run + '.bam' + (' ' + TMP).join(homologous_run_list) + ' -f')
    print(timestamp() + 'Identical biosample ID ' + biosample + ' detected: Data merged.')
   else:
    command('samtools view -b -F 1 ' + OUT + run + '.lite.sam -o ' + TMP + biosample + '.bam')
