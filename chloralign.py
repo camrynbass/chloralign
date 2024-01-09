@@ -9,7 +9,8 @@ import multiprocessing
 from multiprocessing import Pool
 from os import path
 
-DIR = os.getcwd() + '/Desktop/chloralign/'
+
+DIR = os.getcwd() + '/chloralign/'
 SRC = DIR + 'source/'
 TMP = DIR + 'temp/'
 CSV = DIR + 'AccessionList2.txt'
@@ -114,6 +115,7 @@ def check_SRAToolkit():
 
 def main():
  print('\n=====\nWelcome to Chloralign v2.0\n=====\n')
+ print(os.getcwd())
  time_start = time.time()
  for arg in sys.argv:
   argList.append(arg)
