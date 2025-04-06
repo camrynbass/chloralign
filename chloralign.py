@@ -10,10 +10,10 @@ from multiprocessing import Pool
 DIR = os.getcwd() + '/'
 SRC = DIR + 'source/'
 TMP = DIR + 'temp/'
-CSV = DIR + 'AccessionList2.txt'
+OUT = DIR + 'output/'
+CSV = SRC + 'AccessionList2.txt'
 FASTP = SRC + 'fastp'
 REFGENOME = 'HA89_cytoplasm.fasta'
-OUT = DIR + 'output/'
 ERR = 'errorReport.txt'
 numProcessors = 50
 maxTasksPerChild = 1
@@ -103,7 +103,7 @@ def check_SRAToolkit():
   with open(SRC + 'sratoolkit.3.0.2-centos_linux64.tar.gz') as f:
    print(timestamp() + 'SraToolkit file located.')
  except IOError:
-  print(timestamp() + 'SraToolkit not detected. Downloading to source directory...')
+  print(timestamp() + 'SraToolkit not detected. Downloading now...')
   command('wget -P ' + SRC + ' https://ftp-trace.ncbi.nlm.nih.gov/sra/sdk/3.0.2/sratoolkit.3.0.2-centos_linux64.tar.gz')
   print(timestamp() + 'Success: Sratoolkit downloaded.')
   print(timestamp() + 'Decompressing SraToolkit...')
